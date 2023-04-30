@@ -80,11 +80,7 @@ class FriendController extends Controller
             ->where('receiver_id', auth()->user()->id)
             ->delete();
 
-        $requestsTo = auth()->user()->friendRequestsTo;
-        $requestsFrom = auth()->user()->friendRequestsFrom;
-
-        return redirect()->route('people.friendRequests', ['requests_to' => $requestsTo, 'requests_from' => $requestsFrom]);
-
+        return $this->friendRequests();
     }
 
     public function friends(){

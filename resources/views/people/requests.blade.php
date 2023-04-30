@@ -13,7 +13,7 @@
 
         <div class=" col-6">
             <h3 class="text-center">Sent requests</h3>
-            <table class="table text-center">
+            <table class="table table-info table-striped rounded-1 text-center mt-3">
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -39,7 +39,7 @@
         </div>
         <div class=" col-6">
             <h3 class="text-center">Received requests</h3>
-            <table class="table text-center">
+            <table class="table table-success table-striped text-center mt-3">
                 <thead>
                 <tr>
                     <th>Name</th>
