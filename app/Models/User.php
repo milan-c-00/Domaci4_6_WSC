@@ -58,4 +58,13 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'friend_requests', 'receiver_id', 'sender_id');
     }
 
+    public function sentMessages(User $friend){
+        return $this->hasMany(Message::class, 'sender_id')->where('receiver_id', $friend->id)->get();
+    }
+
+    public function receivedMessages(User $friend){
+        return $this->hasMany(Message::class, 'receiver_id')->where('sender_id', $friend->id)->get();
+    }
+
+
 }
