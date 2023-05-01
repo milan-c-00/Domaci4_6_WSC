@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,19 +24,30 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware('auth')->group(function () {
 
-    Route::resource('users', UserController::class);
+    Route::middleware('role:admin')->group(function() {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::resource('users', UserController::class);
+    });
+
+    Route::middleware('role:regular_user')->group(function() {
+
+        Route::get('people', [FriendController::class, 'others'])->name('people.others');
+        Route::post('people/{user}/addFriend', [FriendController::class, 'addFriend'])->name('people.addFriend');
+        Route::get('people/requests', [FriendController::class, 'friendRequests'])->name('people.friendRequests');
+        Route::delete('people/requests/{user}/remove', [FriendController::class, 'removeRequest'])->name('people.removeRequest');
+        Route::post('people/requests/{user}/accept', [FriendController::class, 'acceptRequest'])->name('people.acceptRequest');
+        Route::delete('people/requests/{user}/decline', [FriendController::class, 'declineRequest'])->name('people.declineRequest');
+        Route::get('people/friends', [FriendController::class, 'friends'])->name('people.friends');
+        Route::delete('people/friends/{user}/remove', [FriendController::class, 'removeFriend'])->name('people.removeFriend');
+
+    });
+
 
 });
-//
-//Route::middleware(['auth', 'role:admin'])->group(function() {
-//
-//    Route::resource('users', UserController::class);
-//
-//});
 
 require __DIR__.'/auth.php';

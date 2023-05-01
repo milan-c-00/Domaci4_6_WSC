@@ -12,15 +12,25 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in to admin dashboard!") }}
-                    <br>
-                    {{ __("You can proceed to user management control panel now.") }}
-                    <br>
-                    {{ __("As a superadmin you are authorized to perform CRUD operations on all other users.") }}
-                    <br>
-                    <a href="{{ route('users.index') }}" class="btn btn-outline-dark mt-2">Control panel</a>
-                </div>
+                @if(auth()->user()->role === 'admin')
+                    <div class="p-6 text-gray-900">
+                        {{ __("You're logged in to admin dashboard!") }}
+                        <br>
+                        {{ __("You can proceed to user management control panel now.") }}
+                        <br>
+                        {{ __("As a superadmin you are authorized to perform CRUD operations on all other users.") }}
+                        <br>
+                        <a href="{{ route('users.index') }}" class="btn btn-outline-dark mt-2">Control panel</a>
+                    </div>
+                @else
+                    <div class="p-6 text-gray-900">
+                        {{ __("You're logged in to user dashboard!") }}
+                        <br>
+                        {{ __("As a user you are able to see other users, send friend requests and message friends.") }}
+                        <br>
+                        <a href="{{ route('people.others') }}" class="btn btn-outline-dark mt-2">People</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

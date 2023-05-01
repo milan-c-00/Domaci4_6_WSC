@@ -15,9 +15,21 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                        {{ __('Users') }}
-                    </x-nav-link>
+                    @if(auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('people.others')" :active="request()->routeIs('people.others')">
+                            {{ __('People') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('people.friendRequests')" :active="request()->routeIs('people.requests')">
+                            {{ __('Friend requests') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('people.friends')" :active="request()->routeIs('people.friends')">
+                            {{ __('Friends') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
