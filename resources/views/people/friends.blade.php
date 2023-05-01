@@ -25,10 +25,11 @@
                     <tr>
                         <td class="">{{ $friend->name }}</td>
                         <td class="">
-                            <form method="POST" action="{{ route('people.addFriend', $friend->id) }}">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Message</button>
-                            </form>
+{{--                            <form method="POST" action="{{ route('friend.messages', $friend->id) }}">--}}
+{{--                                @csrf--}}
+{{--                                <button type="submit" class="btn btn-primary">Message</button>--}}
+{{--                            </form>--}}
+                            <a class="btn btn-primary" href="{{ route('friend.messages', $friend->id) }}">Message</a>
                         </td>
                         <td class="">
                             <form method="POST" action="{{ route('people.removeFriend', $friend->id) }}">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('people/requests/{user}/decline', [FriendController::class, 'declineRequest'])->name('people.declineRequest');
         Route::get('people/friends', [FriendController::class, 'friends'])->name('people.friends');
         Route::delete('people/friends/{user}/remove', [FriendController::class, 'removeFriend'])->name('people.removeFriend');
+
+        Route::get('people/friends/{user}/messages', [MessageController::class, 'messages'])->name('friend.messages');
+        Route::post('people/friends/{user}/messages', [MessageController::class, 'sendMessage'])->name('friend.sendMessage');
 
     });
 
