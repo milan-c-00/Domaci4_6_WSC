@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckFriend;
+use App\Http\Middleware\CheckFriendRequest;
 use App\Http\Middleware\CheckRole;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -62,6 +64,8 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'role' => CheckRole::class,
+        'has_request' => CheckFriendRequest::class,
+        'is_friend' => CheckFriend::class,
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,

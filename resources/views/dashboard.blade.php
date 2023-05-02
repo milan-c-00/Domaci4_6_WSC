@@ -28,6 +28,10 @@
                         <br>
                         {{ __("As a user you are able to see other users, send friend requests and message friends.") }}
                         <br>
+                        {{ __("Users are divided in friends, requested users and others.") }}
+                        <br>
+                        {{ __("Go and explore all features of this app!") }}
+                        <br>
                         <a href="{{ route('people.others') }}" class="btn btn-outline-dark mt-2">People</a>
                     </div>
                 @endif

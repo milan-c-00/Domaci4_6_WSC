@@ -39,7 +39,7 @@ class FriendController extends Controller
             'receiver_id' => $user->id
         ]);
 
-        return $this->others();
+        return redirect()->route('people.others');
     }
 
     public function friendRequests(){
@@ -57,10 +57,8 @@ class FriendController extends Controller
             ->where('receiver_id', $user->id)
             ->delete();
 
-        $requestsTo = auth()->user()->friendRequestsTo;
-        $requestsFrom = auth()->user()->friendRequestsFrom;
+        return redirect()->route('people.friendRequests');
 
-        return redirect()->route('people.friendRequests', ['requests_to' => $requestsTo, 'requests_from' => $requestsFrom]);
     }
 
     public function acceptRequest(User $user){
@@ -71,7 +69,7 @@ class FriendController extends Controller
                 'friend_id' => $user->id
             ]);
 
-        return $this->declineRequest($user);    // using decline function to delete request after accepting
+        return $this->declineRequest($user);    // using decline function to delete request after accepting new friend
     }
 
     public function declineRequest(User $user){
@@ -80,7 +78,7 @@ class FriendController extends Controller
             ->where('receiver_id', auth()->user()->id)
             ->delete();
 
-        return $this->friendRequests();
+        return redirect()->route('people.friendRequests');
     }
 
     public function friends(){
@@ -103,7 +101,7 @@ class FriendController extends Controller
             ->where('friend_id', auth()->user()->id)
             ->delete();
 
-        return $this->friends();
+        return redirect()->route('people.friends');
 
     }
 

@@ -24,14 +24,21 @@ class MessageController extends Controller
     public function sendMessage(User $user, StoreMessageRequest $request){
 
         Message::query()->create($request->validated());
-//
-//        $sent = auth()->user()->sentMessages($user);
-//        $received = auth()->user()->receivedMessages($user);
-//
-//        $messages = $sent->merge($received)->sortBy('created_at');
 
         return redirect()->route('friend.messages', $user->id);
 
+    }
+
+    public function deleteConversation(User $user){
+
+        Message::query()
+            ->where('sender_id', auth()->user()->id)
+            ->where('receiver_id', $user->id)
+            ->orWhere('sender_id', $user->id)
+            ->where('receiver_id', auth()->user()->id)
+            ->delete();
+
+        return redirect()->route('friend.messages', $user->id);
     }
 
 }

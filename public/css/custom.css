@@ -1,0 +1,72 @@
+.conversation {
+    height: 50vh;
+    max-height: 50vh;
+    padding: 1vw;
+}
+
+.message {
+    max-width: 60%;
+}
+.user .msg{
+    background-color: #3498db;
+    color: #fff;
+
+}
+
+.friend .msg {
+    background-color: #778899;
+    color: #fff;
+
+}
+
+.msg {
+    display: inline-block;
+    max-width: 80%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.message svg {
+    display: inline;
+    height: 2rem;
+    width: 2rem;
+}
+
+#myScrollableDiv {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.msg-input {
+    width: 100%;
+    max-width: 100%;
+}
+
+.delete-btn {
+    color: white;
+    border: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.delete-btn::before {
+    content: "Delete Conversation";
+    display: none;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background-color: #333;
+    color: #fff;
+    white-space: nowrap;
+    border-radius: 4px;
+}
+
+.delete-btn:hover::before {
+    display: block;
+}
